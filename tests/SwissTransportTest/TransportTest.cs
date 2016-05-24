@@ -28,7 +28,7 @@ namespace SwissTransport
         [TestMethod]
         public void Connections()
         {
-            testee = new Transport();
+            testee2 = new Transport();
             var connections = testee.GetConnections("Sursee", "Luzern");
 
             Assert.IsNotNull(connections);
