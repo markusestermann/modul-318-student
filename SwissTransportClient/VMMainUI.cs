@@ -56,7 +56,7 @@ namespace SwissTransportClient
 
         private async void UpdateStationsTo(string searchtext)
         {
-            var stations = await dataService.GetStations(searchtextFrom);
+            var stations = await dataService.GetStations(searchtextTo);
             this.StationsTo = stations.StationList;
         }
 
