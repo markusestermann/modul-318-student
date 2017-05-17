@@ -36,7 +36,7 @@ namespace WindowsFormsApplication1
             FillAutocomplete();
         }
 
-        private void FillAutocomplete()
+        private async void FillAutocomplete()
         {
             string search = textBox1.Text;
 
@@ -47,7 +47,8 @@ namespace WindowsFormsApplication1
                 //textBox1.AutoCompleteSource = AutoCompleteSource.CustomSource;
 
                 AutoCompleteStringCollection a = new AutoCompleteStringCollection();
-                var sl = t.GetStations(search).StationList;
+                var gs = await t.GetStations(search);
+                var sl = gs.StationList;
 
                 a.Add("");
 
@@ -61,7 +62,7 @@ namespace WindowsFormsApplication1
         }
 
 
-        private void FillCombo()
+        private async void FillCombo()
         {
             string search = comboBox1.Text;
 
@@ -72,8 +73,8 @@ namespace WindowsFormsApplication1
                 //textBox1.AutoCompleteSource = AutoCompleteSource.CustomSource;
 
                 List<string> a = new List<string>();
-                var sl = t.GetStations(search).StationList;
-                               
+                var gs = await t.GetStations(search);
+                var sl = gs.StationList;
 
                 foreach (Station s in sl)
                 {
@@ -101,19 +102,19 @@ namespace WindowsFormsApplication1
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            Station s = new Transport().GetStations("Hildisrieden, Post").StationList[0];
+            //Station s = new Transport().GetStations("Hildisrieden, Post").StationList[0];
 
-            label1.Text = Transport.RequestsRemaining.ToString();
+            //label1.Text = Transport.RequestsRemaining.ToString();
 
-            //TimeSpan ts = TimeSpan.Parse("0d00:05:06");
+            ////TimeSpan ts = TimeSpan.Parse("0d00:05:06");
 
-            //SmtpClient client = new SmtpClient("mail.estermann.it", 25);
+            ////SmtpClient client = new SmtpClient("mail.estermann.it", 25);
 
-            //MailMessage mail = new MailMessage("markus@estermann.it", "markus@estermann.it", "betreff", "Text");
-            //client.Send(mail);
+            ////MailMessage mail = new MailMessage("markus@estermann.it", "markus@estermann.it", "betreff", "Text");
+            ////client.Send(mail);
 
-            GeoCoordinateWatcher x = new GeoCoordinateWatcher();
-            x.ToString();
+            //GeoCoordinateWatcher x = new GeoCoordinateWatcher();
+            //x.ToString();
         }
     }
 }

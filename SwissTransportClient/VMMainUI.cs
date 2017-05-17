@@ -50,14 +50,24 @@ namespace SwissTransportClient
 
         private async void UpdateStationsFrom(string searchtext)
         {
-            var stations = await dataService.GetStations(searchtextFrom);
-            this.StationsFrom = stations.StationList;
+            try
+            {
+                var stations = await dataService.GetStations(searchtextFrom);
+                this.StationsFrom = stations.StationList;
+            }
+            catch
+            { }
         }
 
         private async void UpdateStationsTo(string searchtext)
         {
-            var stations = await dataService.GetStations(searchtextTo);
-            this.StationsTo = stations.StationList;
+            try
+            {
+                var stations = await dataService.GetStations(searchtextTo);
+                this.StationsTo = stations.StationList;
+            }
+            catch
+            { }
         }
 
         public string SearchTextTo

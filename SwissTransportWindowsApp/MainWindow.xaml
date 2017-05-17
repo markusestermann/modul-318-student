@@ -27,5 +27,6 @@
         <TextBox x:Name="textBox_Copy" Text="{Binding SearchTextTo, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Height="23" Margin="242,29,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
         <ListBox x:Name="listBox_Copy" ItemsSource="{Binding Path=StationsTo}" SelectedItem="{Binding SelectedTo}" HorizontalAlignment="Left" Height="174" Margin="242,76,0,0" VerticalAlignment="Top" Width="120" ItemTemplate="{DynamicResource MyStationTemplate}"/>
         <ListBox x:Name="listBox_Copy1" ItemsSource="{Binding Connections}" HorizontalAlignment="Left" Height="174" Margin="420,76,0,0" VerticalAlignment="Top" Width="214" ItemTemplate="{DynamicResource MyConnectionsTemplate}" />
+        <ComboBox x:Name="comboBox1" HorizontalAlignment="Left" Margin="298,273,0,0" VerticalAlignment="Top" Width="120" IsEditable="True" KeyUp="ComboBox_KeyUp" IsTextSearchEnabled="False"/>
     </Grid>
 </Window>
