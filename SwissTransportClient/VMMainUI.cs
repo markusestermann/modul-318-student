@@ -54,6 +54,12 @@ namespace SwissTransportClient
             this.StationsFrom = stations.StationList;
         }
 
+        private async void UpdateStationsTo(string searchtext)
+        {
+            var stations = await dataService.GetStations(searchtextFrom);
+            this.StationsTo = stations.StationList;
+        }
+
         public string SearchTextTo
         {
             get
@@ -66,8 +72,10 @@ namespace SwissTransportClient
 
                 if (searchtextTo.Length >= 3)
                 {
-                    var stations = dataService.GetStations(searchtextTo);
-                    this.StationsTo = stations.Result.StationList;
+                    //var stations = dataService.GetStations(searchtextTo);
+                    //this.StationsTo = stations.Result.StationList;
+
+                    this.UpdateStationsTo(searchtextTo);
                 }
             }
         }
