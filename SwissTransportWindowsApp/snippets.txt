@@ -1,34 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using SwissTransport;
-
-namespace SwissTransportClient
-{
-    public class VMMainUI : INotifyPropertyChanged
-    {
-        Transport dataService = null;
-        List<Station> stationsFrom = null;
-        string searchtextFrom = null;
-        List<Station> stationsTo = null;
-        string searchtextTo = null;
-        Station selectedFrom = null;
-        Station selectedTo = null;
-        List<Connection> connections = null;
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        public VMMainUI()
-        {
-            dataService = new Transport();
-
-            searchtextFrom = "";
-        }
-
-        public string SearchTextFrom
+﻿		public string SearchTextFrom
         {
             get
             {
@@ -103,7 +73,6 @@ namespace SwissTransportClient
                 if (PropertyChanged != null)
                 {
                     PropertyChanged(this, new PropertyChangedEventArgs("StationsFrom"));
-                    PropertyChanged(this, new PropertyChangedEventArgs("CoordinatesFrom"));
                 }
             }
         }
@@ -182,5 +151,3 @@ namespace SwissTransportClient
                 }
             }
         }
-    }
-}

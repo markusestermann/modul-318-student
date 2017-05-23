@@ -1,4 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Threading.Tasks;
 
 namespace SwissTransport
 {
@@ -8,27 +9,36 @@ namespace SwissTransport
         private ITransport testee;
 
         [TestMethod]
-        public void Locations()
+        public void Sursee50Stations()
         {
+            //Arrange
             testee = new Transport();
-            var stations = testee.GetStations("Sursee,");
+            var stations = new Stations();
 
+            //Act
+            Task.Run(() => stations = testee.GetStations("Sursee,").Result).Wait();
+            
+            //Assert
             Assert.AreEqual(50, stations.StationList.Count);
         }
 
         [TestMethod]
         public void StationBoard()
         {
+            //Arrange
             testee = new Transport();
+
+            //Act
             var stationBoard = testee.GetStationBoard("Sursee", "8502007");
 
+            //Assert
             Assert.IsNotNull(stationBoard);
         }
 
         [TestMethod]
         public void Connections()
         {
-            testee2 = new Transport();
+            testee = new Transport();
             var connections = testee.GetConnections("Sursee", "Luzern");
 
             Assert.IsNotNull(connections);

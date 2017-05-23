@@ -73,7 +73,7 @@
             this.comboBox1.Location = new System.Drawing.Point(36, 192);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(121, 21);
-            this.comboBox1.TabIndex = 3;
+            this.comboBox1.TabIndex = 4;
             this.comboBox1.KeyUp += new System.Windows.Forms.KeyEventHandler(this.comboBox1_KeyUp);
             // 
             // timer1
@@ -87,7 +87,7 @@
             this.label1.Location = new System.Drawing.Point(190, 129);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(35, 13);
-            this.label1.TabIndex = 4;
+            this.label1.TabIndex = 3;
             this.label1.Text = "label1";
             // 
             // dateTimePicker1
