@@ -35,6 +35,20 @@ namespace SwissTransport
             Assert.IsNotNull(stationBoard);
         }
 
+
+        [TestMethod]
+        public void StationBoardNoStation()
+        {
+            //Arrange
+            testee = new Transport();
+
+            //Act
+            var stationBoard = testee.GetStationBoard("Hildisrieden, Sempacherstrasse 1", "");
+
+            //Assert
+            Assert.IsNotNull(stationBoard);
+        }
+
         [TestMethod]
         public void Connections()
         {

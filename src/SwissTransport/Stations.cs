@@ -9,12 +9,12 @@ namespace SwissTransport
         public string Type { get; set; }
 
         [JsonProperty("x")]
-        public double XCoordinate { get; set; }
+        public double? XCoordinate { get; set; }
 
         [JsonProperty("y")]
-        public double YCoordinate { get; set; }
+        public double? YCoordinate { get; set; }
         [JsonProperty("z")]
-        public double ZCoordinate { get; set; }
+        public double? ZCoordinate { get; set; }
     }
 
     public class Station
