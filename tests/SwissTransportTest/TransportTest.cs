@@ -19,7 +19,7 @@ namespace SwissTransport
             Task.Run(() => stations = testee.GetStations("Sursee,").Result).Wait();
             
             //Assert
-            Assert.AreEqual(50, stations.StationList.Count);
+            Assert.AreEqual(10, stations.StationList.Count);
         }
 
         [TestMethod]

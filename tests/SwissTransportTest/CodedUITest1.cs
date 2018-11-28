@@ -8,7 +8,7 @@ using Microsoft.VisualStudio.TestTools.UITesting;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Microsoft.VisualStudio.TestTools.UITest.Extension;
 using Keyboard = Microsoft.VisualStudio.TestTools.UITesting.Keyboard;
-
+using System.IO;
 
 namespace SwissTransport
 {
@@ -25,7 +25,7 @@ namespace SwissTransport
         [TestMethod]
         public void CodedUITestMethod1()
         {
-            ApplicationUnderTest aut = ApplicationUnderTest.Launch(@"C:\Users\maesbas\Desktop\M318\Repos\modul-318-student\SwissTransportWindowsApp\bin\Debug\SwissTransportWindowsApp.exe");
+            ApplicationUnderTest aut = ApplicationUnderTest.Launch(Path.Combine(Directory.GetCurrentDirectory(), "SwissTransportWindowsApp.exe"));
             
             // To generate code for this test, select "Generate Code for Coded UI Test" from the shortcut menu and select one of the menu items.
             this.UIMap.RecordedMethod1();
