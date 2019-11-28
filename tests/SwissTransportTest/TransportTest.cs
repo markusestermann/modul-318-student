@@ -57,5 +57,14 @@ namespace SwissTransport
 
             Assert.IsNotNull(connections);
         }
+
+        [TestMethod]
+        public void ConnectionsHildLuzWithLinesDeparture()
+        {
+            testee = new Transport();
+            var connections = testee.GetConnections("Hildisrieden", "Luzern", new System.DateTime(2019, 12, 1, 11, 30, 0));
+
+            Assert.IsNotNull(connections);
+        }
     }
 }

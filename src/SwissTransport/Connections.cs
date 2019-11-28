@@ -19,6 +19,9 @@ namespace SwissTransport
 
         [JsonProperty("duration")]
         public string Duration { get; set; }
+
+        [JsonProperty("products")]
+        public string[] Products { get; set; }
     }
 
     public class ConnectionPoint
@@ -30,7 +33,7 @@ namespace SwissTransport
 
         public string ArrivalTimestamp { get; set; }
 
-        public string Departure { get; set; }
+        public System.DateTime? Departure { get; set; }
 
         public string DepartureTimestamp { get; set; }
 

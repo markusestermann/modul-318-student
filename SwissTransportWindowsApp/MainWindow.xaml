@@ -8,15 +8,35 @@
         Title="MainWindow" Height="350" Width="672.561">
     <Window.Resources>
         <DataTemplate x:Key="MyStationTemplate">
-            <TextBlock Text="{Binding Path=Name}" />
+            <StackPanel Orientation="Horizontal">
+                <Image Height="25" Width="17">
+                    <Image.Style>
+                        <Style TargetType="Image">
+                            <Setter Property="Source" Value="icon-null.png"/>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Icon}" Value="bus">
+                                    <Setter Property="Source" Value="icon-bus.png"/>
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding Icon}" Value="train">
+                                    <Setter Property="Source" Value="icon-train.png"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Image.Style>
+                </Image>
+                <TextBlock Text=" " />
+                <TextBlock Text="{Binding Path=Name}" VerticalAlignment="Center" />
+            </StackPanel>
         </DataTemplate>
         <DataTemplate x:Key="MyConnectionsTemplate">
-            <StackPanel Orientation="Horizontal">
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom">
                 <TextBlock Text="{Binding Path=From.Station.Name}" />
-                <Label Content="->" />
+                <TextBlock Text=" -> " />
                 <TextBlock Text="{Binding Path=To.Station.Name}" />
-                <Label Content=": Abfahrt " />
-                <TextBlock Text="{Binding Path=From.Departure}" />
+                <TextBlock Text=", Abfahrt " />
+                <TextBlock Text="{Binding Path=From.Departure, StringFormat={}{0:HH:mm}}" />
+                <TextBlock Text=" Gleis " />
+                <TextBlock Text="{Binding Path=From.Platform}" />
             </StackPanel>
         </DataTemplate>
     </Window.Resources>
