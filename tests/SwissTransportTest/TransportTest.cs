@@ -9,7 +9,7 @@ namespace SwissTransport
         private ITransport testee;
 
         [TestMethod]
-        public void Sursee50Stations()
+        public void Sursee10Stations()
         {
             //Arrange
             testee = new Transport();
@@ -61,10 +61,17 @@ namespace SwissTransport
         [TestMethod]
         public void ConnectionsHildLuzWithLinesDeparture()
         {
+            //Arrange
             testee = new Transport();
+            
+            //Act
             var connections = testee.GetConnections("Hildisrieden", "Luzern", new System.DateTime(2019, 12, 1, 11, 30, 0));
-
+            
+            //Assert
             Assert.IsNotNull(connections);
+            Assert.IsNotNull(connections.ConnectionList);
+            Assert.IsTrue(connections.ConnectionList.Count == 4);
+            Assert.IsTrue(connections.ConnectionList[1].Products.Length == 2);
         }
     }
 }

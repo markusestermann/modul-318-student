@@ -114,7 +114,6 @@
   <ItemGroup>
     <Resource Include="icon-bus.png" />
     <Resource Include="icon-train.png" />
-    <Resource Include="icon-tram.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="icon-null.png" />

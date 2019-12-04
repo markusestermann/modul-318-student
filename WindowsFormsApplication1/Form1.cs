@@ -19,7 +19,7 @@ namespace WindowsFormsApplication1
         {
             InitializeComponent();
 
-            timer1.Start();
+            //timer1.Start();
         }
 
         private void cmdShowHelloMessage_Click(object sender, EventArgs e)
@@ -81,7 +81,13 @@ namespace WindowsFormsApplication1
                     a.Add(s.Name);
                 }
 
-                comboBox1.Items.AddRange(a.ToArray());
+                while (comboBox1.Items.Count > 1)
+                    comboBox1.Items.RemoveAt(0);
+
+                //comboBox1.Items.Clear(); // setzt den Cursor an den anfang zurück
+                
+                if(a.Count >0)
+                    comboBox1.Items.AddRange(a.ToArray());
             }
         }
 
@@ -97,7 +103,11 @@ namespace WindowsFormsApplication1
 
         private void comboBox1_KeyUp(object sender, KeyEventArgs e)
         {
-            FillCombo();
+            if (e.KeyCode != Keys.Up
+                && e.KeyCode != Keys.Down)
+            {
+                FillCombo();
+            }
         }
 
         private void timer1_Tick(object sender, EventArgs e)
