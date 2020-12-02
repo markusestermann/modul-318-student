@@ -31,6 +31,32 @@ namespace SwissTransportWindowsApp
             textBox.Focus();
         }
 
+        private void textBox_GotFocus(object sender, RoutedEventArgs e)
+        {
+            ((VMMainUI)this.DataContext).IsFromFocused = true;
+        }
+
+        private void textBox_LostFocus(object sender, RoutedEventArgs e)
+        {
+            ((VMMainUI)this.DataContext).IsFromFocused = false;
+        }
+
+        private void listBox_GotFocus(object sender, RoutedEventArgs e)
+        {
+            ((VMMainUI)this.DataContext).IsFromDropFocused = true;
+        }
+
+        private void listBox_LostFocus(object sender, RoutedEventArgs e)
+        {
+            ((VMMainUI)this.DataContext).IsFromDropFocused = false;
+        }
+
+        private void ContentControl_GotFocus(object sender, RoutedEventArgs e)
+        {
+            ((VMMainUI)this.DataContext).IsSelectionVisible = false;
+            textBox.Focus();
+        }
+
         //private async void ComboBox_KeyUp(object sender, KeyEventArgs e)
         //{
         //    string search = comboBox1.Text;

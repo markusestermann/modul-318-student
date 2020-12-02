@@ -18,6 +18,11 @@ namespace SwissTransportClient
         Station selectedFrom = null;
         Station selectedTo = null;
         List<Connection> connections = null;
+        DateTime datumzeit;
+        bool isFromFocused = false;
+        bool isFromDroppedDown = false;
+        bool isFromDropFocused = false;
+        bool isSelectionVisible = false;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -26,6 +31,7 @@ namespace SwissTransportClient
             dataService = new Transport();
 
             searchtextFrom = "";
+            datumzeit = DateTime.Now;
         }
 
         public string SearchTextFrom
@@ -137,6 +143,11 @@ namespace SwissTransportClient
                 selectedFrom = value;
 
                 this.FindConnections();
+
+                if (PropertyChanged != null)
+                {
+                    PropertyChanged(this, new PropertyChangedEventArgs("SelectedFrom"));
+                }
             }
         }
 
@@ -155,12 +166,26 @@ namespace SwissTransportClient
             }
         }
 
+        public DateTime DatumZeit
+        {
+            get
+            {
+                return datumzeit;
+            }
+            set
+            {
+                datumzeit = value;
+
+                this.FindConnections();
+            }
+        }
+
         private void FindConnections()
         {
             if(this.SelectedFrom != null
                 && this.SelectedTo != null)
             {
-                var connections = dataService.GetConnections(this.SelectedFrom.Name, this.SelectedTo.Name);
+                var connections = dataService.GetConnections(this.SelectedFrom.Name, this.SelectedTo.Name, this.DatumZeit);
 
                 this.Connections = connections.ConnectionList;
             }
@@ -179,6 +204,91 @@ namespace SwissTransportClient
                 if (PropertyChanged != null)
                 {
                     PropertyChanged(this, new PropertyChangedEventArgs("Connections"));
+                }
+            }
+        }
+
+        public bool IsFromFocused
+        {
+            get
+            {
+                return isFromFocused;
+            }
+            set
+            {
+                isFromFocused = value;
+
+                if (PropertyChanged != null)
+                {
+                    PropertyChanged(this, new PropertyChangedEventArgs("IsFromFocused"));
+                }
+
+                this.IsFromDroppedDown = this.IsFromFocused || this.IsFromDropFocused;
+                this.IsSelectionVisible = this.IsFromFocused == false;
+            }
+        }
+
+        public bool IsFromDroppedDown
+        {
+            get
+            {
+                return isFromDroppedDown;
+            }
+            set
+            {
+                isFromDroppedDown = value;
+
+                if (PropertyChanged != null)
+                {
+                    PropertyChanged(this, new PropertyChangedEventArgs("IsFromDroppedDown"));
+                }
+            }
+        }
+
+        public bool IsFromDropFocused
+        {
+            get
+            {
+                return isFromDropFocused;
+            }
+            set
+            {
+                isFromDropFocused = value;
+
+                this.IsFromDroppedDown = this.IsFromFocused || this.IsFromDropFocused;
+            }
+        }
+
+        public bool IsSelectionVisible
+        {
+            get
+            {
+                return isSelectionVisible;
+            }
+            set
+            {
+                isSelectionVisible = value;
+
+                if (PropertyChanged != null)
+                {
+                    PropertyChanged(this, new PropertyChangedEventArgs("IsSelectionVisible"));
+                }
+
+                this.IsTextFromVisible = !this.IsSelectionVisible;
+            }
+        }
+
+        public bool IsTextFromVisible
+        {
+            get
+            {
+                return this.IsSelectionVisible == false; ;
+            }
+            set
+            {
+                if (PropertyChanged != null)
+                {
+                    PropertyChanged(this, new PropertyChangedEventArgs("IsTextFromVisible"));
                 }
             }
         }

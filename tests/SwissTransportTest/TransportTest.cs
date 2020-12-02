@@ -65,7 +65,7 @@ namespace SwissTransport
             testee = new Transport();
             
             //Act
-            var connections = testee.GetConnections("Hildisrieden", "Luzern", new System.DateTime(2019, 12, 1, 11, 30, 0));
+            var connections = testee.GetConnections("Hildisrieden", "Luzern", new System.DateTime(2020, 12, 1, 11, 25, 0));
             
             //Assert
             Assert.IsNotNull(connections);

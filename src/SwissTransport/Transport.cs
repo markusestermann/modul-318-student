@@ -53,7 +53,7 @@ namespace SwissTransport
 
             if (departure != new System.DateTime())
             {
-                query += "&date=" + departure.ToString("yyyy-MM-dd") + "&time=" + departure.ToString("hh:mm");
+                query += "&date=" + departure.ToString("yyyy-MM-dd") + "&time=" + departure.ToString("HH:mm");
             }
 
             var request = CreateWebRequest("http://transport.opendata.ch/v1/connections?" + query);

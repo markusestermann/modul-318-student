@@ -7,6 +7,7 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="672.561">
     <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
         <DataTemplate x:Key="MyStationTemplate">
             <StackPanel Orientation="Horizontal">
                 <Image Height="25" Width="17">
@@ -29,24 +30,34 @@
             </StackPanel>
         </DataTemplate>
         <DataTemplate x:Key="MyConnectionsTemplate">
-            <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom">
-                <TextBlock Text="{Binding Path=From.Station.Name}" />
-                <TextBlock Text=" -> " />
-                <TextBlock Text="{Binding Path=To.Station.Name}" />
-                <TextBlock Text=", Abfahrt " />
-                <TextBlock Text="{Binding Path=From.Departure, StringFormat={}{0:HH:mm}}" />
-                <TextBlock Text=" Gleis " />
-                <TextBlock Text="{Binding Path=From.Platform}" />
-            </StackPanel>
+            <Border Margin="0, 5, 0, 5">
+                <StackPanel Orientation="Vertical" HorizontalAlignment="Left">
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom">
+                        <TextBlock Text="{Binding Path=From.Station.Name}" FontSize="12" FontWeight="Bold" />
+                        <TextBlock Text=" -> " />
+                        <TextBlock Text="{Binding Path=To.Station.Name}" FontSize="12" FontWeight="Bold" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" Margin="0,5,0,0">
+                        <TextBlock Text="⌚ " />
+                        <TextBlock Text="{Binding Path=From.Departure, StringFormat={}{0:HH:mm}}" />
+                        <TextBlock Text=" " />
+                        <Border CornerRadius="1" BorderBrush="Blue" BorderThickness="2" Background="Blue">
+                            <TextBlock Text="{Binding Path=From.Platform, TargetNullValue='?'}" Width="10" Height="10" Foreground="White" FontSize="8" HorizontalAlignment="Stretch" TextAlignment="Center" />
+                        </Border>
+                    </StackPanel>
+                </StackPanel>
+            </Border>
         </DataTemplate>
     </Window.Resources>
     <Grid>
-        <TextBox x:Name="textBox" Text="{Binding Path=SearchTextFrom, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Height="23" Margin="10,12,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="180"/>
-        <ListBox x:Name="listBox" ItemsSource="{Binding Path=StationsFrom}" SelectedItem="{Binding SelectedFrom}" HorizontalAlignment="Left" Height="174" Margin="10,40,0,0" VerticalAlignment="Top" Width="180" ItemTemplate="{DynamicResource MyStationTemplate}"/>
+        <TextBox x:Name="textBox" Text="{Binding Path=SearchTextFrom, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Height="23" Margin="10,12,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="180" GotFocus="textBox_GotFocus" LostFocus="textBox_LostFocus" Visibility="{Binding IsTextFromVisible, Converter={StaticResource BooleanToVisibilityConverter}}" />
+        <ListBox x:Name="listBox" ItemsSource="{Binding Path=StationsFrom}" SelectedItem="{Binding SelectedFrom}" HorizontalAlignment="Left" Height="174" Margin="10,40,0,0" VerticalAlignment="Top" Width="180" ItemTemplate="{DynamicResource MyStationTemplate}" Visibility="{Binding IsFromDroppedDown, Converter={StaticResource BooleanToVisibilityConverter}}" GotFocus="listBox_GotFocus" LostFocus="listBox_LostFocus"/>
         <TextBox x:Name="textBox_Copy" Text="{Binding SearchTextTo, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Height="23" Margin="195,12,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="194"/>
         <ListBox x:Name="listBox_Copy" ItemsSource="{Binding Path=StationsTo}" SelectedItem="{Binding SelectedTo}" HorizontalAlignment="Left" Height="174" Margin="195,40,0,0" VerticalAlignment="Top" Width="194" ItemTemplate="{DynamicResource MyStationTemplate}"/>
-        <Button x:Name="button" Content="Button" HorizontalAlignment="Left" Margin="394,15,0,0" VerticalAlignment="Top" Width="75" />
+        <TextBox x:Name="datumzeit" Text="{Binding Path=DatumZeit, StringFormat='dd.MM.yy HH:mm'}" HorizontalAlignment="Left" Margin="394,10,0,0" Width="75" Height="23" VerticalAlignment="Top"/>
+        <Button x:Name="button" Content="Button" HorizontalAlignment="Left" Margin="494,10,0,0" VerticalAlignment="Top" Width="75" />
         <ListBox x:Name="listBox_Copy1" ItemsSource="{Binding Connections}" HorizontalAlignment="Left" Height="174" Margin="394,40,0,0" VerticalAlignment="Top" Width="261" ItemTemplate="{DynamicResource MyConnectionsTemplate}" />
         <ComboBox x:Name="comboBox1" HorizontalAlignment="Left" Margin="298,273,0,0" VerticalAlignment="Top" Width="120" IsEditable="True" IsTextSearchEnabled="False"/>
+        <ContentControl Content="{Binding SelectedFrom}" Background="White" HorizontalAlignment="Left" Margin="10,12,0,0" VerticalAlignment="Top" ContentTemplate="{StaticResource MyStationTemplate}" Width="180" Visibility="{Binding IsSelectionVisible, Converter={StaticResource BooleanToVisibilityConverter}}" GotFocus="ContentControl_GotFocus" />
     </Grid>
 </Window>

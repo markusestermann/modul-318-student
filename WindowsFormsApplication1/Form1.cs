@@ -81,13 +81,25 @@ namespace WindowsFormsApplication1
                     a.Add(s.Name);
                 }
 
+                comboBox1.DroppedDown = true;
+
                 while (comboBox1.Items.Count > 1)
                     comboBox1.Items.RemoveAt(0);
 
                 //comboBox1.Items.Clear(); // setzt den Cursor an den anfang zurück
-                
-                if(a.Count >0)
+
+                if (a.Count > 0)
                     comboBox1.Items.AddRange(a.ToArray());
+
+                //comboBox1.DroppedDown = comboBox1.Items.Count > 0;
+            }
+            else
+            {
+                while (comboBox1.Items.Count >= 1)
+                    comboBox1.Items.RemoveAt(0);
+
+                //comboBox1.Items.Clear(); // setzt den Cursor an den anfang zurück
+
             }
         }
 
